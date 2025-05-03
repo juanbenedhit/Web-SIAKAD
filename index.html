@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en  ">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- mengimport framwork tailwind css dan google icons -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+
+    <title>SIAKAD UTDI | LOGIN</title>
+</head>
+
+
+<!-- bagian body memiliki bakground gradasi dari biru ke biru muda, minimum tinggi layar, dan mengatur tata letak -->
+
+<body class="bg-gradient-to-b from-[#001845] to-[#003566] min-h-screen flex items-center justify-center">
+
+    <!-- bagian login terdapat background putih, border radius xl, shadow, padding, dan mengatur tata letak -->
+    <div class="login-card bg-white rounded-xl shadow-lg p-8 w-full max-w-md text-center m-2">
+        <img src="assets/images/utdi-text.png" alt="LOGO UTDI">
+
+        <!-- bagian judul portal akademik terdapat resposive text, letter spacing, font bold, font italic, drop shadow -->
+        <h1
+            class="sm:text-3xl text-2xl tracking-widest font-extrabold text-blue-900 italic mt-1 drop-shadow-lg drop-shadow-orange-700/50">
+            PORTAL AKADEMIK
+        </h1>
+        <hr class="my-4 border-gray-500"> <!-- garis pemisah -->
+
+        <!-- bagian form login mengatur agar terdapat background biru, border radius, shadow, padding, mengatur tata letak input form, terdapat icon dan mengatur jarak -->
+        <div class="bg-blue-100 rounded-xl shadow p-4">
+            <form action="" method="" class="space-y-4">
+                <div class="text-left space-y-4">
+                    <div
+                        class="flex bg-white items-center border border-white rounded-md px-3 py-2 focus-within:ring-2 focus-within:ring-blue-400">
+                        <span class="material-symbols-outlined text-gray-800 mr-2">
+                            person
+                        </span>
+                        <input id="username" type="text" class="w-full focus:outline-none text-gray-800"
+                            placeholder="Pengguna" />
+                    </div>
+
+                    <div
+                        class="flex bg-white items-center border border-white rounded-md px-3 py-2 focus-within:ring-2 focus-within:ring-blue-400">
+                        <span class="material-symbols-outlined text-gray-800 mr-2">
+                            password
+                        </span>
+                        <input id="username" type="text" class="w-full focus:outline-none text-gray-800"
+                            placeholder="Kata Kunci" />
+                    </div>
+
+                    <a href="pages/home.html"
+                        class="block text-center text-white font-medium py-2 rounded-lg bg-blue-900 transition delay-150 duration-300 ease-in-out hover:bg-indigo-700 active:scale-95 focus:outline-none">
+                        Login
+                    </a>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+</body>
+
+</html>

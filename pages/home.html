@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIAKAD UTDI | HOME</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+</head>
+
+<!-- bagian body memiliki minimum tinggi layar, dan background biru  -->
+
+<body class="bg-blue-100 min-h-screen flex flex-col">
+
+    <main class="flex-grow">
+        <!-- baigan heeader akan muncul pada layar kecil, dan mengatur tata letak text Portal Akademik dengan background biru -->
+        <div class="lg:hidden flex items-center justify-between p-4 bg-blue-900 text-white ">
+            <h1 class="text-xl font-bold">Portal Akademik</h1>
+
+            <!-- button hamburger -->
+            <button id="mobile-menu-button" class="focus:outline-none">
+                <span class="material-symbols-outlined text-3xl ">menu</span>
+            </button>
+        </div>
+
+        <div class="flex flex-col lg:flex-row">
+            <!-- sidebar akan muncul pada layar besar, mengatur ukuran, warna background  -->
+            <aside id="sidebar" class="hidden lg:block bg-blue-900 w-full lg:w-64 lg:min-h-screen">
+
+                <!-- mengatur tata letak, dan paddinng dan ukuran gambar -->
+                <div class="flex justify-center pt-5 lg:pt-10">
+                    <img src="/../assets/images/UTDI-logo2.png" alt="logo-utdi"
+                        class="w-16 h-16 lg:w-24 lg:h-24 mx-auto rounded-full border-gray-100">
+                </div>
+
+                <!-- bagian navlinks mengatur tata letak, jarak antar navlinks, mengatur margin dan padding-->
+                <div class="flex justify-center mt-6 lg:mt-10 pb-4">
+
+                    <!-- bagian navlinks -->
+                    <ul class="space-y-4 w-full px-4">
+                        <!-- setiap navlink mengatur tata letak, warna, border radius, efek transisi dan efek ketika di klik -->
+                        <li
+                            class="h-10 text-gray-100 hover:text-blue-900 hover:bg-gray-100 rounded-xl transition ease-in-out duration-300 flex items-center pl-4 active:bg-gray-100 active:scale-95 active:text-blue-900">
+                            <a href="" class="flex space-x-2 items-center w-full">
+                                <span class="material-symbols-outlined">account_circle</span>
+                                <span>Profil</span>
+                            </a>
+                        </li>
+
+                        <li
+                            class="h-10 text-gray-100 hover:text-blue-900 hover:bg-gray-100 rounded-xl transition ease-in-out duration-300 flex items-center pl-4 active:bg-gray-100 active:scale-95 active:text-blue-900">
+                            <a href="" class="flex space-x-2 items-center w-full">
+                                <span class="material-symbols-outlined">assignment</span>
+                                <span>KRS</span>
+                            </a>
+                        </li>
+
+                        <li
+                            class="h-10 text-gray-100 hover:text-blue-900 hover:bg-gray-100 rounded-xl transition ease-in-out duration-300 flex items-center pl-4 active:bg-gray-100 active:scale-95 active:text-blue-900">
+                            <a href="" class="flex space-x-2 items-center w-full">
+                                <span class="material-symbols-outlined">grading</span>
+                                <span>Nilai</span>
+                            </a>
+                        </li>
+
+                        <li
+                            class="h-10 text-gray-100 hover:text-blue-900 hover:bg-gray-100 rounded-xl transition ease-in-out duration-300 flex items-center pl-4 active:bg-gray-100 active:scale-95 active:text-blue-900">
+                            <a href="" class="flex space-x-2 items-center w-full">
+                                <span class="material-symbols-outlined">check_circle</span>
+                                <span>Presensi</span>
+                            </a>
+                        </li>
+
+                        <li
+                            class="h-10 text-gray-100 hover:text-blue-900 hover:bg-gray-100 rounded-xl transition ease-in-out duration-300 flex items-center pl-4 active:bg-gray-100 active:scale-95 active:text-blue-900">
+                            <a href="" class="flex space-x-2 items-center w-full">
+                                <span class="material-symbols-outlined">menu_book</span>
+                                <span>Panduan</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+
+            <!-- Bagian konten utama memiliki lebar full, dan mengatur padding -->
+            <div class="w-full p-4 lg:p-6  ">
+
+                <!-- bagian container welcome, mengatur warna background, border radius, shadow, padding, dan mengatur tata letak -->
+                <div class="bg-gray-100 rounded-r-xl shadow mb-6 p-4">
+
+                    <div class="flex flex-col md:flex-row items-center gap-4">
+                        <!-- bagian welcome text, mengatur tata letak, besar kecil text, font bold, font italic, letter spacing, dan mengatur jarak -->
+                        <div class="text-center md:text-left md:flex-1">
+                            <p class="text-sm md:text-lg">Selamat Datang,</p>
+                            <h1 class="text-xl md:text-2xl lg:text-3xl text-blue-900 font-bold tracking-wider">
+                                ALEXANDER JUAN BENEDICT WIJAYA
+                            </h1>
+                            <span class="text-xs md:text-sm text-gray-500 tracking-wider">225410054</span>
+                        </div>
+
+                        <!-- bagian foto mahasiswa mengatur tata letak, mengatur jarak, ukuran foto, mengatur jarak, dan membuat tombol logout dengan icon -->
+                        <div class="flex flex-col items-center space-y-2 sm:m-0 md:m-0 xl:mr-4 ">
+                            <img src="/../assets/images/Mahasiswa.jpg" alt="foto-mahasiswa"
+                                class="w-20 h-20 rounded-full border-gray-400 border-2">
+
+                            <a href="../index.html" class="flex justify-center gap-2 font-medium text-sm">
+                                <span class="material-symbols-outlined text-sm">logout</span>
+                                Log Out
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- bagian grid container, mengatur grid, gap, dan mengatur tata letak -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                    <!-- mengatur warna background, border radius, shadow, dan padding-->
+                    <div class="bg-gray-100 rounded-xl shadow p-4">
+
+                        <!-- bagian text mengatur jarak, font bold, mengatur jarak, dan ukuran responsive text -->
+                        <div class="space-y-2">
+                            <h1 class="font-bold text-lg md:text-xl">
+                                Selamat Datang
+                            </h1>
+                            <p class="text-sm md:text-base text-justify">
+                                Selamat Datang di Portal Akademik. Portal Akademik adalah sistem yang memungkinkan para
+                                civitas akademika Universitas Teknologi Digital Indonesia untuk menerima informasi
+                                dengan
+                                lebih cepat melalui Internet. Sistem ini diharapkan dapat memberi kemudahan setiap
+                                civitas
+                                akademika untuk melakukan aktivitas-aktivitas akademik dan proses belajar mengajar.
+                                Selamat
+                                menggunakan fasilitas ini.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Bagian info akademik mengatur warna background, border radius, shadow, danpadding -->
+                    <div class="bg-gray-100 rounded-xl shadow p-4">
+
+                        <!-- bagian text dan button mengatur jarak, font bold, mengatur jarak, ukuran responsive text, efek hover, dan efek saat diklik -->
+                        <div class="space-y-3">
+                            <h1 class="font-bold text-lg md:text-xl">
+                                Info Akademik
+                            </h1>
+                            <div class="grid grid-cols-1 gap-3">
+                                <button
+                                    class="bg-blue-100 rounded-xl p-2 text-sm md:text-base font-semibold hover:drop-shadow-md hover:bg-blue-900 hover:text-gray-100 duration-300 active:bg-blue-900 active:scale-95 active:text-gray-100">Kalender
+                                    Akademik</button>
+                                <button
+                                    class="bg-blue-100 rounded-xl p-2 text-sm md:text-base font-semibold hover:drop-shadow-md hover:bg-blue-900 hover:text-gray-100 duration-300 active:bg-blue-900 active:scale-95 active:text-gray-100">Informasi
+                                    Matakuliah</button>
+                                <button
+                                    class="bg-blue-100 rounded-xl p-2 text-sm md:text-base font-semibold hover:drop-shadow-md hover:bg-blue-900 hover:text-gray-100 duration-300 active:bg-blue-900 active:scale-95 active:text-gray-100">Jadwal
+                                    Ujian</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Bagian jadwal mengatur warna background, border radius, shadow, dan padding -->
+                    <div class="bg-gray-100 rounded-xl shadow p-4">
+
+                        <!-- bagian text dan table mengatur jarak, font bold, mengatur jarak, dan ukuran responsive text -->
+                        <div class="space-y-3">
+                            <h1 class="font-bold text-lg md:text-xl">
+                                Jadwal Kuliah Hari Ini
+                            </h1>
+                            <div class="text-xs md:text-sm bg-blue-100 rounded-xl p-2 overflow-x-auto">
+                                <table class="w-full">
+                                    <thead>
+                                        <tr>
+                                            <th class="px-2 py-2">Jam</th>
+                                            <th class="px-2 py-2">Ruangan</th>
+                                            <th class="px-2 py-2">Matakuliah</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="border-t-2 border-gray-400 text-center">
+                                        <tr>
+                                            <td class="px-2 py-1">08:00 - 10:00</td>
+                                            <td class="px-2 py-1">S.3.3</td>
+                                            <td class="px-2 py-1">Pemrograman Web</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-2 py-1">10:00 - 12:00</td>
+                                            <td class="px-2 py-1">T.3.2</td>
+                                            <td class="px-2 py-1">Big Data</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-2 py-1">13:00 - 15:00</td>
+                                            <td class="px-2 py-1">S.2.1</td>
+                                            <td class="px-2 py-1">Framework Mobile</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bagian berita mengatur warna background, border radius, shadow, dan padding -->
+                    <div class="bg-gray-100 rounded-xl shadow p-4">
+
+                        <!-- bagian text mengatur jarak, font bold, mengatur jarak, ukuran responsive text berita memberi efek shadow dan transisi-->
+                        <div class="space-y-3">
+                            <h1 class="font-bold text-lg md:text-xl">
+                                Berita
+                            </h1>
+
+                            <div class="berita bg-white shadow rounded-xl hover:shadow-md transition p-1">
+                                <p class="p-4 font-bold text-xs md:text-sm text-gray-600">
+                                    12-13 Mei 2025 Libur Hari Raya Waisak 2569 BE
+                                </p>
+                            </div>
+                            <div class="berita bg-white shadow rounded-xl hover:shadow-md transition p-1">
+                                <p class="p-4 font-bold text-xs md:text-sm text-gray-600">
+                                    29-30 Mei 2025 Libur Kenaikan Yesus Kristus
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="footer w-full bg-blue-900 text-white py-2 px-6 mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class=" mb-1 text-center md:text-left">
+                    <p class="text-xs">Portal Akademik Universitas Teknologi Digital Indonesia</p>
+                </div>
+                <div class="text-center md:text-right">
+                    <p class="text-xs ">&copy; 2025 SIAKAD UTDI</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <script>
+        // bagian sidebar button untuk membuka dan menutup sidebar
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const sidebar = document.getElementById('sidebar');
+
+        mobileMenuButton.addEventListener('click', () => {
+            sidebar.classList.toggle('hidden');
+
+            // mengubah icon saat sidebar terbuka dan tertutup
+            const menuIcon = mobileMenuButton.querySelector('.material-symbols-outlined');
+            if (sidebar.classList.contains('hidden')) {
+                menuIcon.textContent = 'menu';
+            } else {
+                menuIcon.textContent = 'close';
+            }
+        });
+
+        // menutup sidebar ketika user mengeklik salah satu navlinks
+        const menuItems = sidebar.querySelectorAll('li');
+        menuItems.forEach(item => {
+            item.addEventListener('click', () => {
+                if (window.innerWidth < 1024) { // mengatur sidebar ketika layar kecil
+                    sidebar.classList.add('hidden');
+                    mobileMenuButton.querySelector('.material-symbols-outlined').textContent = 'menu';
+                }
+            });
+        });
+
+        // baigan pengaturan sidebar ketika layar besar
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 1024) { // mengatur sidebar ketika layar besar
+                sidebar.classList.remove('hidden');
+            } else {
+                sidebar.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+
+</html>
