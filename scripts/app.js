@@ -1,23 +1,16 @@
 registerSW();
 
-// Registers a service worker
 async function registerSW() {
   if ("serviceWorker" in navigator) {
     try {
-      // path atau path file service-worker.js yang akan di register
-      const registration = await navigator.serviceWorker.register(
+      const reg = await navigator.serviceWorker.register(
         "/scripts/service-worker.js"
       );
-    } catch (error) {
-      // text error message
-      showResult("Error while registering: " + error.message);
+      console.log("SW registered:", reg.scope);
+    } catch (e) {
+      console.error("SW registration failed:", e);
     }
   } else {
-    // text jika service worker tidak ada
-    showResult("Service workers API not available");
+    console.warn("Service Workers not supported");
   }
-}
-
-function showResult(text) {
-  document.querySelector("output").innerHTML = text;
 }
