@@ -58,7 +58,7 @@ self.addEventListener("fetch", (event) => {
         );
         // mencoba mengambil dari cache
         const cachedResponse = await caches.match(event.request);
-        return cachedResponse || caches.match("/offline.html"); // Jika tidak ada di cache, kembalikan offline.html
+        return cachedResponse || caches.match("offline.html"); // Jika tidak ada di cache, kembalikan offline.html
       }
     })()
   );
