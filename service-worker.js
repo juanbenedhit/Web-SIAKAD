@@ -1,13 +1,13 @@
 // menggunakan caching dengan fallback offline
 const CACHE_NAME = "siakad-assets-v1";
 const urlsToCache = [
-  "/",
-  "offline.html", //halaman ketika offline
-  "pages/home.html",
-  "scripts/app.js",
-  "assets/images/Mahasiswa.jpg",
-  "assets/images/UTDI-logo2.png",
-  "assets/images/utdi-text.png",
+  "./", // Merepresentasikan root dari scope service worker (index.html)
+  "./offline.html", //halaman ketika offline, relatif terhadap service-worker.js
+  "./pages/home.html",
+  "./scripts/app.js",
+  "./assets/images/Mahasiswa.jpg",
+  "./assets/images/UTDI-logo2.png",
+  "./assets/images/utdi-text.png",
 ];
 
 // Saat service worker ter-install
@@ -58,7 +58,7 @@ self.addEventListener("fetch", (event) => {
         );
         // mencoba mengambil dari cache
         const cachedResponse = await caches.match(event.request);
-        return cachedResponse || caches.match("offline.html"); // Jika tidak ada di cache, kembalikan offline.html
+        return cachedResponse || caches.match("./offline.html"); // Gunakan path relatif untuk fallback juga
       }
     })()
   );
