@@ -2,12 +2,12 @@
 const CACHE_NAME = "siakad-assets-v1";
 const urlsToCache = [
   "/",
-  "/offline.html", //halaman ketika offline
-  "/pages/home.html",
-  "/scripts/app.js",
-  "/assets/images/Mahasiswa.jpg",
-  "/assets/images/UTDI-logo2.png",
-  "/assets/images/utdi-text.png",
+  "offline.html", //halaman ketika offline
+  "pages/home.html",
+  "scripts/app.js",
+  "assets/images/Mahasiswa.jpg",
+  "assets/images/UTDI-logo2.png",
+  "assets/images/utdi-text.png",
 ];
 
 // Saat service worker ter-install
