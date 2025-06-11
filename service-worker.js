@@ -2,8 +2,9 @@
 const CACHE_NAME = "siakad-assets-v1";
 const urlsToCache = [
   "/",
+  "/index.html",
   "/offline.html", //halaman ketika offline
-  "/pages/home.html",
+  // "/pages/home.html",
   "/scripts/app.js",
   "/assets/images/Mahasiswa.jpg",
   "/assets/images/UTDI-logo2.png",
