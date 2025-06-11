@@ -4,18 +4,18 @@ const urlsToCache = [
   "/",
   "/index.html",
   "/offline.html", //halaman ketika offline
-  // "/pages/home.html",
+  // kenapa tidak memanggil halaman home.html agar halaman offline bisa terpanggil ketika tidak ada caching halaman lain
   "/scripts/app.js",
   "/assets/images/Mahasiswa.jpg",
   "/assets/images/UTDI-logo2.png",
   "/assets/images/utdi-text.png",
 ];
 
-// Saat service worker ter-install
+// menangani install event saat service worker pertama kali diinstal
 self.addEventListener("install", (event) => {
-  // Precache semua file statis
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
+      // jika berhasil maka akan muncul text di console
       console.log("Service Worker: Precaching assets");
       return cache.addAll(urlsToCache);
     })
@@ -24,7 +24,7 @@ self.addEventListener("install", (event) => {
 
 // Saat service worker aktif
 self.addEventListener("activate", (event) => {
-  // Bersihkan cache lama jika ada
+  // memberi tahu service worker untuk menghapus cache lama jika ada
   event.waitUntil(
     caches.keys().then((cacheNames) => {
       return Promise.all(
@@ -36,7 +36,7 @@ self.addEventListener("activate", (event) => {
   );
 });
 
-// Menangani permintaan fetch (online dulu, fallback offline)
+// Menangani permintaan fetch dari jaringan dan cache
 self.addEventListener("fetch", (event) => {
   if (
     event.request.method !== "GET" ||
