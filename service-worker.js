@@ -39,7 +39,7 @@ self.addEventListener("activate", (event) => {
   );
 });
 
-// Menangani permintaan fetch dengan strategi "Cache First, falling back to Network"
+// Menangani permintaan fetch dari jaringan dan cache
 self.addEventListener("fetch", (event) => {
   if (
     event.request.method !== "GET" ||
@@ -49,10 +49,21 @@ self.addEventListener("fetch", (event) => {
   }
 
   event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
-      // Jika resource ditemukan di cache, langsung kembalikan dari cache.
-      if (cachedResponse) return cachedResponse;
-      return fetch(event.request);
-    })
+    (async () => {
+      try {
+        // mencoba mengambil dari jaringan online
+        const networkResponse = await fetch(event.request);
+        return networkResponse; // Jika berhasil, kembalikan respons jaringan
+      } catch (error) {
+        // Jaringan gagal (kemungkinan offline) maka di console akan muncul text
+        console.log(
+          "Service Worker: Fetch failed, trying cache for:",
+          event.request.url
+        );
+        // mencoba mengambil dari cache
+        const cachedResponse = await caches.match(event.request);
+        return cachedResponse || caches.match("/offline.html"); // Jika tidak ada di cache, kembalikan offline.html
+      }
+    })()
   );
 });

@@ -5,10 +5,9 @@ async function registerSW() {
   if ("serviceWorker" in navigator) {
     // Mendaftarkan service worker
     try {
-      const reg = await navigator.serviceWorker.register(
-        "/service-worker.js",
-        { scope: "/" } // Menetapkan scope ke root agar service worker mengontrol seluruh situs
-      );
+      const reg = await navigator.serviceWorker.register("/service-worker.js", {
+        scope: "/",
+      });
       // SW = service worker jika berhasil maka akan muncul text di console
       console.log("SW registered:", reg.scope);
     } catch (e) {
