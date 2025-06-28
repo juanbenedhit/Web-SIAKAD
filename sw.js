@@ -22,7 +22,11 @@ self.addEventListener("install", (event) => {
     (async () => {
       const cache = await caches.open(CACHE_NAME);
       console.log("Service Worker: Precaching assets");
-      await cache.addAll(urlsToCache);
+      try {
+        await cache.addAll(urlsToCache);
+      } catch (err) {
+        console.error("❌ Gagal cache file:", err);
+      }
     })()
   );
 });
