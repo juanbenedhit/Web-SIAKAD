@@ -51,4 +51,18 @@ self.addEventListener("fetch", (event) => {
   ) {
     return;
   }
+  event.respondWith(
+    caches.match(event.request).then((cachedResponse) => {
+      // Jika ada di cache, gunakan itu
+      if (cachedResponse) {
+        return cachedResponse;
+      }
+
+      // Jika tidak ada di cache, ambil dari jaringan
+      return fetch(event.request).catch((err) => {
+        console.warn("Gagal fetch dari jaringan:", event.request.url);
+        // Tidak perlu tampilkan offline.html, cukup biarkan gagal (untuk file statis non-page)
+      });
+    })
+  );
 });
