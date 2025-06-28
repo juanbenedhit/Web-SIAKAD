@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIAKAD UTDI | INFORMASI MATAKULIAH</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- mengimport file app.js yang nantinya digunakan untuk service worker -->
+    <script src="../scripts/app.js"></script>
+    <!-- mengimport data awal terlebih dahulu -->
+    <script src="../scripts/dbMatkul.js"></script>
+    <!-- mengimport logika database yang menggunakan data tersebut -->
+    <script defer src="../scripts/infoMatkul-db.js"></script>
+
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+    <!-- Script untuk notifikasi offline akan ditambahkan di akhir body -->
+</head>
+
+<!-- bagian body memiliki minimum tinggi layar, dan background biru  -->
+
+<body class="flex flex-col min-h-screen bg-blue-100">
+
+    <!-- bagian notifikasi card jika offline  -->
+    <div id="offline-indicator"
+        class="fixed bottom-5 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-sm font-medium py-2 px-5 rounded-lg shadow-md z-50 opacity-0 invisible transition-all duration-300 ease-in-out">
+        Anda sedang offline</div>
+
+    <main class="flex-grow">
+        <!-- baigan heeader akan muncul pada layar kecil, dan mengatur tata letak text Portal Akademik dengan background biru -->
+        <div class="flex items-center justify-between p-4 text-white bg-blue-900 lg:hidden ">
+            <a href="home.html" class="focus:outline-none">
+                <span class="text-3xl material-symbols-outlined ">arrow_back</span>
+            </a>
+
+            <h1 class="text-xl font-bold">Informasi MataKuliah</h1>
+
+            <!-- button hamburger -->
+            <button id="mobile-menu-button" class="focus:outline-none">
+                <span class="text-3xl material-symbols-outlined ">menu</span>
+            </button>
+        </div>
+
+        <div class="flex flex-col lg:flex-row">
+            <!-- sidebar akan muncul pada layar besar, mengatur ukuran, warna background  -->
+            <aside id="sidebar" class="hidden w-full bg-blue-900 lg:block lg:w-64 lg:min-h-screen">
+
+                <!-- mengatur tata letak, dan paddinng dan ukuran gambar -->
+                <div class="flex justify-center pt-5 lg:pt-10">
+                    <img src="../assets/images/UTDI-logo2.png" alt="logo-utdi"
+                        class="w-16 h-16 mx-auto border-gray-100 rounded-full lg:w-24 lg:h-24">
+                </div>
+
+                <!-- bagian navlinks mengatur tata letak, jarak antar navlinks, mengatur margin dan padding-->
+                <div class="flex justify-center pb-4 mt-6 lg:mt-10">
+
+                    <!-- bagian navlinks -->
+                    <ul class="w-full px-4 space-y-4">
+                        <!-- setiap navlink mengatur tata letak, warna, border radius, efek transisi dan efek ketika di klik -->
+                        <li
+                            class="flex items-center h-10 pl-4 text-gray-100 transition duration-300 ease-in-out hover:text-blue-900 hover:bg-gray-100 rounded-xl active:bg-gray-100 active:scale-95 active:text-blue-900">
+                            <a href="" class="flex items-center w-full space-x-2">
+                                <span class="material-symbols-outlined">account_circle</span>
+                                <span>Profil</span>
+                            </a>
+                        </li>
+
+                        <li
+                            class="flex items-center h-10 pl-4 text-gray-100 transition duration-300 ease-in-out hover:text-blue-900 hover:bg-gray-100 rounded-xl active:bg-gray-100 active:scale-95 active:text-blue-900">
+                            <a href="" class="flex items-center w-full space-x-2">
+                                <span class="material-symbols-outlined">assignment</span>
+                                <span>KRS</span>
+                            </a>
+                        </li>
+
+                        <li
+                            class="flex items-center h-10 pl-4 text-gray-100 transition duration-300 ease-in-out hover:text-blue-900 hover:bg-gray-100 rounded-xl active:bg-gray-100 active:scale-95 active:text-blue-900">
+                            <a href="" class="flex items-center w-full space-x-2">
+                                <span class="material-symbols-outlined">grading</span>
+                                <span>Nilai</span>
+                            </a>
+                        </li>
+
+                        <li
+                            class="flex items-center h-10 pl-4 text-gray-100 transition duration-300 ease-in-out hover:text-blue-900 hover:bg-gray-100 rounded-xl active:bg-gray-100 active:scale-95 active:text-blue-900">
+                            <a href="" class="flex items-center w-full space-x-2">
+                                <span class="material-symbols-outlined">check_circle</span>
+                                <span>Presensi</span>
+                            </a>
+                        </li>
+
+                        <li
+                            class="flex items-center h-10 pl-4 text-gray-100 transition duration-300 ease-in-out hover:text-blue-900 hover:bg-gray-100 rounded-xl active:bg-gray-100 active:scale-95 active:text-blue-900">
+                            <a href="" class="flex items-center w-full space-x-2">
+                                <span class="material-symbols-outlined">menu_book</span>
+                                <span>Panduan</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+
+            <!-- Bagian konten utama memiliki lebar full, dan mengatur padding -->
+            <div class="w-full p-4 lg:p-6 ">
+
+                <!-- bagian container welcome, mengatur warna background, border radius, shadow, padding, dan mengatur tata letak -->
+                <div class="hidden p-4 mb-6 bg-blue-900 shadow sm:block md:block lg:block rounded-r-xl">
+
+                    <div class="flex flex-col items-center gap-4 md:flex-row">
+
+                        <!-- bagian foto mahasiswa mengatur tata letak, mengatur jarak, ukuran foto, mengatur jarak, dan membuat tombol logout dengan icon -->
+                        <div class="flex flex-col items-center space-y-2 sm:m-0 md:m-0 xl:mr-4 ">
+                            <a href="home.html"
+                                class="flex justify-center w-20 h-20 gap-2 text-gray-100 rounded-full outline-none hover:text-blue-900 hover:bg-blue-100 focus:outline-none">
+                                <span class="flex items-center text-6xl material-symbols-outlined">arrow_back</span>
+                            </a>
+                        </div>
+
+                        <!-- bagian welcome text, mengatur tata letak, besar kecil text, font bold, font italic, letter spacing, dan mengatur jarak -->
+                        <div class="flex justify-center text-center md:text-left md:flex-1">
+                            <h1 class="text-xl font-bold tracking-wider text-gray-100 md:text-2xl lg:text-3xl">
+                                INFORMASI MATAKULIAH
+                            </h1>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <!-- bagian grid container, mengatur grid, gap, dan mengatur tata letak -->
+                <div id="matkulContainer" class="grid grid-cols-1 gap-6 md:grid-cols-2">
+                    <!-- Data matakuliah akan dipanggil di sini menggunakan infomatkul-db.js -->
+                </div>
+            </div>
+
+        </div>
+        <!-- bagian footer mengatur lebar agar full, background biru, warna text putih dan mengatur padding dan margin -->
+        <div class="bottom-0 w-full px-6 py-2 mx-auto text-white bg-blue-900 footer">
+            <!-- mengatur responsive layout dan jarak antar items -->
+            <div class="flex flex-col items-center justify-between md:flex-row">
+                <div class="mb-1 text-center md:text-left">
+                    <p class="text-xs">Portal Akademik Universitas Teknologi Digital Indonesia</p>
+                </div>
+                <div class="text-center md:text-right">
+                    <p class="text-xs ">&copy; 2025 SIAKAD UTDI</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <script>
+        // bagian sidebar button untuk membuka dan menutup sidebar
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const sidebar = document.getElementById('sidebar');
+
+        mobileMenuButton.addEventListener('click', () => {
+            sidebar.classList.toggle('hidden');
+
+            // mengubah icon saat sidebar terbuka dan tertutup
+            const menuIcon = mobileMenuButton.querySelector('.material-symbols-outlined');
+            if (sidebar.classList.contains('hidden')) {
+                menuIcon.textContent = 'menu';
+            } else {
+                menuIcon.textContent = 'close';
+            }
+        });
+
+        // menutup sidebar ketika user mengeklik salah satu navlinks
+        const menuItems = sidebar.querySelectorAll('li');
+        menuItems.forEach(item => {
+            item.addEventListener('click', () => {
+                if (window.innerWidth < 1024) { // mengatur sidebar ketika layar kecil
+                    sidebar.classList.add('hidden');
+                    mobileMenuButton.querySelector('.material-symbols-outlined').textContent = 'menu';
+                }
+            });
+        });
+
+        // baigan pengaturan sidebar ketika layar besar
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 1024) { // mengatur sidebar ketika layar besar
+                sidebar.classList.remove('hidden');
+            } else {
+                sidebar.classList.add('hidden');
+            }
+        });
+    </script>
+
+    <!-- Script untuk notifikasi offline -->
+    <script src="../scripts/offline.js"></script>
+</body>
+
+</html>

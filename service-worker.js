@@ -1,11 +1,14 @@
 // menggunakan caching dengan fallback offline
-const CACHE_NAME = "siakad-assets-v1";
+const CACHE_NAME = "siakad-assets-v2";
 const urlsToCache = [
   "/",
-  "/index.html",
-  "/offline.html", //halaman ketika offline
-  // kenapa tidak memanggil halaman home.html agar halaman offline bisa terpanggil ketika tidak ada caching halaman lain
+  "/pages/home.html",
+  "/pages/infoMatkul.html",
   "/scripts/app.js",
+  "/scripts/infoMatkul-db.js",
+  "/scripts/dbMatkul.js",
+  "/scripts/offline.js",
+  "/scripts/weather.js",
   "/assets/images/Mahasiswa.jpg",
   "/assets/images/UTDI-logo2.png",
   "/assets/images/utdi-text.png",
@@ -36,7 +39,7 @@ self.addEventListener("activate", (event) => {
   );
 });
 
-// Menangani permintaan fetch dari jaringan dan cache
+// Menangani permintaan fetch dengan strategi "Cache First, falling back to Network"
 self.addEventListener("fetch", (event) => {
   if (
     event.request.method !== "GET" ||
@@ -46,21 +49,10 @@ self.addEventListener("fetch", (event) => {
   }
 
   event.respondWith(
-    (async () => {
-      try {
-        // mencoba mengambil dari jaringan online
-        const networkResponse = await fetch(event.request);
-        return networkResponse; // Jika berhasil, kembalikan respons jaringan
-      } catch (error) {
-        // Jaringan gagal (kemungkinan offline) maka di console akan muncul text
-        console.log(
-          "Service Worker: Fetch failed, trying cache for:",
-          event.request.url
-        );
-        // mencoba mengambil dari cache
-        const cachedResponse = await caches.match(event.request);
-        return cachedResponse || caches.match("/offline.html"); // Jika tidak ada di cache, kembalikan offline.html
-      }
-    })()
+    caches.match(event.request).then((cachedResponse) => {
+      // Jika resource ditemukan di cache, langsung kembalikan dari cache.
+      if (cachedResponse) return cachedResponse;
+      return fetch(event.request);
+    })
   );
 });
