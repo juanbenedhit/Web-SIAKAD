@@ -29,7 +29,7 @@ self.addEventListener("install", (event) => {
   );
 });
 
-// saat service worker aktif
+// menghapus cache lama saat activate
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
@@ -54,20 +54,15 @@ self.addEventListener("fetch", (event) => {
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
       if (cachedResponse) {
-        return cachedResponse; // jika ada di cache
+        return cachedResponse;
       }
-
-      return fetch(event.request)
-        .then((networkResponse) => {
-          return networkResponse; // jika berhasil fetch online
-        })
-        .catch(() => {
-          // jika offline dan tidak ada di cache, kembalikan response kosong agar tidak error
-          return new Response("", {
-            status: 200,
-            statusText: "Offline - no cache",
-          });
-        });
+      // Jika tidak ada di cache, coba ambil dari jaringan
+      return fetch(event.request).catch((err) => {
+        // Jika gagal ambil dari jaringan dan ini permintaan halaman
+        if (event.request.destination === "document") {
+          return caches.match("/pages/home.html"); // fallback halaman
+        }
+      });
     })
   );
 });
