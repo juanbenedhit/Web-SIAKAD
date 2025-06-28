@@ -1,5 +1,5 @@
 // menggunakan caching dengan fallback offline
-const CACHE_NAME = "siakad-assets-v4";
+const CACHE_NAME = "siakad-assets-v3";
 const urlsToCache = [
   "/",
   "/pages/home.html",
@@ -57,8 +57,11 @@ self.addEventListener("fetch", (event) => {
         return cachedResponse;
       }
       // Jika tidak ada di cache, coba ambil dari jaringan
-      return fetch(event.request).catch(() => {
-        return;
+      return fetch(event.request).catch((err) => {
+        // Jika gagal ambil dari jaringan dan ini permintaan halaman
+        if (event.request.destination === "document") {
+          return caches.match("/pages/home.html");
+        }
       });
     })
   );
