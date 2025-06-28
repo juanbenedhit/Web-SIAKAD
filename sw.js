@@ -29,9 +29,8 @@ self.addEventListener("install", (event) => {
   );
 });
 
-// Saat service worker aktif
+// saat service worker aktif
 self.addEventListener("activate", (event) => {
-  // memberi tahu service worker untuk menghapus cache lama jika ada
   event.waitUntil(
     caches.keys().then((cacheNames) => {
       return Promise.all(
@@ -43,7 +42,7 @@ self.addEventListener("activate", (event) => {
   );
 });
 
-// event listener untuk permintaan fetch strategi Cache-First kemudian Network
+// menangani fetch request dengan strategi: Cache First, lalu Network
 self.addEventListener("fetch", (event) => {
   if (
     event.request.method !== "GET" ||
@@ -51,17 +50,24 @@ self.addEventListener("fetch", (event) => {
   ) {
     return;
   }
+
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
-      // Jika ada di cache, gunakan dari cache
       if (cachedResponse) {
-        return cachedResponse;
+        return cachedResponse; // jika ada di cache
       }
-      // Jika tidak ada di cache, coba fetch dari network
-      return fetch(event.request).catch(() => {
-        // Jika network gagal (offline), tidak menampilkan apa-apa
-        return;
-      });
+
+      return fetch(event.request)
+        .then((networkResponse) => {
+          return networkResponse; // jika berhasil fetch online
+        })
+        .catch(() => {
+          // jika offline dan tidak ada di cache, kembalikan response kosong agar tidak error
+          return new Response("", {
+            status: 200,
+            statusText: "Offline - no cache",
+          });
+        });
     })
   );
 });
