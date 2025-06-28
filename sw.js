@@ -2,6 +2,7 @@
 const CACHE_NAME = "siakad-assets-v3";
 const urlsToCache = [
   "/",
+  "offline.html",
   "/pages/home.html",
   "/pages/infoMatkul.html",
   "/scripts/app.js",
@@ -58,10 +59,14 @@ self.addEventListener("fetch", (event) => {
         return cachedResponse;
       }
 
-      // Jika tidak ada di cache, ambil dari jaringan
+      // Jika tidak ada di cache, coba ambil dari jaringan
       return fetch(event.request).catch((err) => {
-        console.warn("Gagal fetch dari jaringan:", event.request.url);
-        // Tidak perlu tampilkan offline.html, cukup biarkan gagal (untuk file statis non-page)
+        console.warn("Network error for:", event.request.url);
+
+        // Fallback jika ini permintaan halaman (HTML)
+        if (event.request.destination === "document") {
+          return caches.match("/offline.html");
+        }
       });
     })
   );
