@@ -2,7 +2,7 @@
 const CACHE_NAME = "siakad-assets-v3";
 const urlsToCache = [
   "/",
-  "/index.html",
+  "/offline.html",
   "/pages/home.html",
   "/pages/infoMatkul.html",
   "/scripts/app.js",
@@ -13,7 +13,6 @@ const urlsToCache = [
   "/assets/images/Mahasiswa.jpg",
   "/assets/images/UTDI-logo2.png",
   "/assets/images/utdi-text.png",
-  "/offline.html",
 ];
 
 // menangani install event saat service worker pertama kali diinstal
@@ -25,7 +24,7 @@ self.addEventListener("install", (event) => {
       try {
         await cache.addAll(urlsToCache);
       } catch (err) {
-        console.error("❌ Gagal cache file:", err);
+        console.error("Gagal cache file:", err);
       }
     })()
   );
@@ -45,7 +44,7 @@ self.addEventListener("activate", (event) => {
   );
 });
 
-// Menangani permintaan fetch. Strategi: Cache-First, lalu Network
+// event listener untuk permintaan fetch strategi Cache-First kemudian Network
 self.addEventListener("fetch", (event) => {
   if (
     event.request.method !== "GET" ||
@@ -54,18 +53,13 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
+  // jika tidak ada cache maka kembali ke halaman offline
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
-      // Jika ada di cache, kembalikan dari cache.
-      // Jika tidak, coba ambil dari jaringan.
       return (
         cachedResponse ||
         fetch(event.request).catch(() => {
-          // Jika permintaan jaringan juga gagal (misalnya, offline),
-          // kembalikan halaman offline untuk permintaan navigasi.
-          if (event.request.mode === "navigate") {
-            return caches.match("/offline.html");
-          }
+          return caches.match("/offline.html");
         })
       );
     })
