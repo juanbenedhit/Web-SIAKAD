@@ -1,29 +1,29 @@
 // menggunakan caching dengan fallback offline
-const CACHE_NAME = "siakad-assets-v2";
+const CACHE_NAME = "siakad-assets-v3";
 const urlsToCache = [
-  "./",
-  "./index.html",
-  "./pages/home.html",
-  "./pages/infoMatkul.html",
-  "./scripts/app.js",
-  "./scripts/infomatkul.js",
-  "./scripts/dbmatkul.js",
-  "./scripts/offline.js",
-  "./scripts/weather.js",
-  "./assets/images/Mahasiswa.jpg",
-  "./assets/images/UTDI-logo2.png",
-  "./assets/images/utdi-text.png",
-  "./offline.html",
+  "/",
+  "/index.html",
+  "/pages/home.html",
+  "/pages/infoMatkul.html",
+  "/scripts/app.js",
+  "/scripts/infomatkul.js",
+  "/scripts/dbmatkul.js",
+  "/scripts/offline.js",
+  "/scripts/weather.js",
+  "/assets/images/Mahasiswa.jpg",
+  "/assets/images/UTDI-logo2.png",
+  "/assets/images/utdi-text.png",
+  "/offline.html",
 ];
 
 // menangani install event saat service worker pertama kali diinstal
-self.addEventListener("install", async (event) => {
+self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      // jika berhasil maka akan muncul text di console
+    (async () => {
+      const cache = await caches.open(CACHE_NAME);
       console.log("Service Worker: Precaching assets");
-      return cache.addAll(urlsToCache);
-    })
+      await cache.addAll(urlsToCache);
+    })()
   );
 });
 
@@ -41,7 +41,7 @@ self.addEventListener("activate", (event) => {
   );
 });
 
-// Menangani permintaan fetch dari jaringan dan cache
+// Menangani permintaan fetch. Strategi: Cache-First, lalu Network
 self.addEventListener("fetch", (event) => {
   if (
     event.request.method !== "GET" ||
@@ -51,21 +51,19 @@ self.addEventListener("fetch", (event) => {
   }
 
   event.respondWith(
-    (async () => {
-      try {
-        // mencoba mengambil dari jaringan online
-        const networkResponse = await fetch(event.request);
-        return networkResponse; // Jika berhasil, kembalikan respons jaringan
-      } catch (error) {
-        // Jaringan gagal (kemungkinan offline) maka di console akan muncul text
-        console.log(
-          "Service Worker: Fetch failed, trying cache for:",
-          event.request.url
-        );
-        // mencoba mengambil dari cache
-        const cachedResponse = await caches.match(event.request);
-        return cachedResponse || caches.match("./offline.html"); // Jika tidak ada di cache, kembalikan offline.html
-      }
-    })()
+    caches.match(event.request).then((cachedResponse) => {
+      // Jika ada di cache, kembalikan dari cache.
+      // Jika tidak, coba ambil dari jaringan.
+      return (
+        cachedResponse ||
+        fetch(event.request).catch(() => {
+          // Jika permintaan jaringan juga gagal (misalnya, offline),
+          // kembalikan halaman offline untuk permintaan navigasi.
+          if (event.request.mode === "navigate") {
+            return caches.match("/offline.html");
+          }
+        })
+      );
+    })
   );
 });
