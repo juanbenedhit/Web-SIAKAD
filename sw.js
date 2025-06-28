@@ -1,19 +1,19 @@
 // menggunakan caching dengan fallback offline
 const CACHE_NAME = "siakad-assets-v2";
 const urlsToCache = [
-  "/Web-SIAKAD/",
-  "/Web-SIAKAD/index.html",
-  "/Web-SIAKAD/pages/home.html",
-  "/Web-SIAKAD/pages/infoMatkul.html",
-  "/Web-SIAKAD/scripts/app.js",
-  "/Web-SIAKAD/scripts/infoMatkul-db.js",
-  "/Web-SIAKAD/scripts/dbMatkul.js",
-  "/Web-SIAKAD/scripts/offline.js",
-  "/Web-SIAKAD/scripts/weather.js",
-  "/Web-SIAKAD/assets/images/Mahasiswa.jpg",
-  "/Web-SIAKAD/assets/images/UTDI-logo2.png",
-  "/Web-SIAKAD/assets/images/utdi-text.png",
-  "/Web-SIAKAD/offline.html",
+  "./",
+  "./index.html",
+  "./pages/home.html",
+  "./pages/infoMatkul.html",
+  "./scripts/app.js",
+  "./scripts/infomatkul.js",
+  "./scripts/dbmatkul.js",
+  "./scripts/offline.js",
+  "./scripts/weather.js",
+  "./assets/images/Mahasiswa.jpg",
+  "./assets/images/UTDI-logo2.png",
+  "./assets/images/utdi-text.png",
+  "./offline.html",
 ];
 
 // menangani install event saat service worker pertama kali diinstal
@@ -64,7 +64,7 @@ self.addEventListener("fetch", (event) => {
         );
         // mencoba mengambil dari cache
         const cachedResponse = await caches.match(event.request);
-        return cachedResponse || caches.match("/Web-SIAKAD/offline.html"); // Jika tidak ada di cache, kembalikan offline.html
+        return cachedResponse || caches.match("./offline.html"); // Jika tidak ada di cache, kembalikan offline.html
       }
     })()
   );
