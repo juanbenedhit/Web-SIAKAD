@@ -54,7 +54,7 @@ self.addEventListener("fetch", (event) => {
   }
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
-      // Jika ada di cache, gunakan itu
+      // Jika ada di cache, gunakan dari cache
       if (cachedResponse) {
         return cachedResponse;
       }
@@ -63,7 +63,7 @@ self.addEventListener("fetch", (event) => {
       return fetch(event.request).catch((err) => {
         console.warn("Network error for:", event.request.url);
 
-        // Fallback jika ini permintaan halaman (HTML)
+        // Fallback jika ada permintaan halaman yang tidak tercache
         if (event.request.destination === "document") {
           return caches.match("/offline.html");
         }
