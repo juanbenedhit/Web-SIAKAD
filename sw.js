@@ -42,26 +42,40 @@ self.addEventListener("activate", (event) => {
   );
 });
 
-// menangani fetch request dengan strategi: Cache First, lalu Network
+// menangani fetch event yang dimana cache terlebih dahulu baru network
 self.addEventListener("fetch", (event) => {
   if (
     event.request.method !== "GET" ||
     event.request.url.startsWith("chrome-extension://")
   ) {
+    // jika bukan maka dihentikan
     return;
   }
 
+  // jika ada respon di cahce maka kembalikan
   event.respondWith(
     caches.match(event.request).then((cachedResponse) => {
       if (cachedResponse) {
         return cachedResponse;
       }
-      // Jika tidak ada di cache, coba ambil dari jaringan
-      return fetch(event.request).catch((err) => {
-        // Jika gagal ambil dari jaringan dan ini permintaan halaman
-        if (event.request.destination === "document") {
-          return caches.match("/pages/home.html");
-        }
+
+      //  jika tidak ada di cache, kita coba ambil dari network
+      return fetch(event.request).catch(() => {
+        // kembalikan halaman yang terdapat di cache
+        return caches.keys().then((cacheNames) => {
+          // membuka cache terbaru
+          return caches.open(CACHE_NAME).then((cache) => {
+            return cache.keys().then((requests) => {
+              // mengambil halaman fallback dan carikan di page yang dibutuhkan
+              const pageFallback = requests.find((req) =>
+                req.url.includes("/pages/")
+              );
+              return pageFallback
+                ? cache.match(pageFallback)
+                : Response.error();
+            });
+          });
+        });
       });
     })
   );
