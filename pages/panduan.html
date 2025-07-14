@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIAKAD UTDI | PANDUAN</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../scripts/app.js"></script>
+    <link rel="manifest" href="/manifest.json">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+</head>
+
+<body class="flex flex-col min-h-screen bg-blue-100">
+
+    <div id="offline-indicator"
+        class="fixed bottom-5 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-sm font-medium py-2 px-5 rounded-lg shadow-md z-50 opacity-0 invisible transition-all duration-300 ease-in-out">
+        Anda sedang offline</div>
+
+    <main class="flex-grow">
+        <div class="flex items-center justify-between p-4 text-white bg-blue-900 lg:hidden ">
+            <a href="home.html" class="focus:outline-none">
+                <span class="text-3xl material-symbols-outlined ">arrow_back</span>
+            </a>
+            <h1 class="text-xl font-bold">Panduan</h1>
+            <button id="mobile-menu-button" class="focus:outline-none">
+                <span class="text-3xl material-symbols-outlined ">menu</span>
+            </button>
+        </div>
+
+        <div class="flex flex-col lg:flex-row">
+            <aside id="sidebar" class="hidden w-full bg-blue-900 lg:block lg:w-64 lg:min-h-screen">
+                <div class="flex justify-center pt-5 lg:pt-10">
+                    <img src="../assets/images/UTDI-logo2.png" alt="logo-utdi"
+                        class="w-16 h-16 mx-auto border-gray-100 rounded-full lg:w-24 lg:h-24">
+                </div>
+                <div class="flex justify-center pb-4 mt-6 lg:mt-10">
+                    <ul class="w-full px-4 space-y-4">
+                        <li
+                            class="flex items-center h-10 pl-4 text-gray-100 transition duration-300 ease-in-out hover:text-blue-900 hover:bg-gray-100 rounded-xl active:bg-gray-100 active:scale-95 active:text-blue-900">
+                            <a href="profil.html" class="flex items-center w-full space-x-2">
+                                <span class="material-symbols-outlined">account_circle</span>
+                                <span>Profil</span>
+                            </a>
+                        </li>
+                        <li
+                            class="flex items-center h-10 pl-4 text-gray-100 transition duration-300 ease-in-out hover:text-blue-900 hover:bg-gray-100 rounded-xl active:bg-gray-100 active:scale-95 active:text-blue-900">
+                            <a href="krs.html" class="flex items-center w-full space-x-2">
+                                <span class="material-symbols-outlined">assignment</span>
+                                <span>KRS</span>
+                            </a>
+                        </li>
+                        <li
+                            class="flex items-center h-10 pl-4 text-gray-100 transition duration-300 ease-in-out hover:text-blue-900 hover:bg-gray-100 rounded-xl active:bg-gray-100 active:scale-95 active:text-blue-900">
+                            <a href="nilai.html" class="flex items-center w-full space-x-2">
+                                <span class="material-symbols-outlined">grading</span>
+                                <span>Nilai</span>
+                            </a>
+                        </li>
+                        <li
+                            class="flex items-center h-10 pl-4 text-gray-100 transition duration-300 ease-in-out hover:text-blue-900 hover:bg-gray-100 rounded-xl active:bg-gray-100 active:scale-95 active:text-blue-900">
+                            <a href="presensi.html" class="flex items-center w-full space-x-2">
+                                <span class="material-symbols-outlined">check_circle</span>
+                                <span>Presensi</span>
+                            </a>
+                        </li>
+                        <li
+                            class="flex items-center h-10 pl-4 text-blue-900 transition duration-300 ease-in-out bg-gray-100 text-blue-900 rounded-xl">
+                            <a href="panduan.html" class="flex items-center w-full space-x-2">
+                                <span class="material-symbols-outlined">menu_book</span>
+                                <span>Panduan</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+
+            <div class="w-full p-4 lg:p-6 ">
+                <div class="p-6 bg-gray-100 shadow rounded-xl">
+                    <h2 class="text-2xl font-bold text-blue-900 mb-6">Panduan Penggunaan SIAKAD</h2>
+                    <div class="space-y-8">
+                        <div>
+                            <h3 class="text-lg font-semibold text-blue-800 mb-2">1. Panduan Pengisian KRS</h3>
+                            <p class="text-gray-700 text-justify">Untuk mengisi Kartu Rencana Studi (KRS), silakan masuk
+                                ke menu 'KRS'. Pilih matakuliah yang tersedia sesuai dengan semester Anda. Pastikan
+                                total SKS yang Anda ambil tidak melebihi batas maksimal. Setelah selesai memilih, klik
+                                tombol 'Simpan KRS' dan ajukan persetujuan kepada Dosen Pembimbing Akademik Anda.</p>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-blue-800 mb-2">2. Melihat Nilai</h3>
+                            <p class="text-gray-700 text-justify">Anda dapat melihat riwayat nilai Anda pada menu
+                                'Nilai'. Halaman ini akan menampilkan Indeks Prestasi per semester (IPS) dan Indeks
+                                Prestasi Kumulatif (IPK) beserta rincian nilai untuk setiap matakuliah yang telah Anda
+                                tempuh.</p>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-blue-800 mb-2">3. Cek Presensi</h3>
+                            <p class="text-gray-700 text-justify">Menu 'Presensi' digunakan untuk memantau kehadiran
+                                Anda dalam perkuliahan. Pastikan persentase kehadiran Anda di atas 75% untuk dapat
+                                mengikuti Ujian Akhir Semester (UAS).</p>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-blue-800 mb-2">4. Bantuan</h3>
+                            <p class="text-gray-700 text-justify">Jika Anda mengalami kendala teknis atau memiliki
+                                pertanyaan terkait penggunaan SIAKAD, silakan hubungi bagian BAAK (Biro Administrasi
+                                Akademik dan Kemahasiswaan) melalui email baak@utdi.ac.id atau datang langsung ke kantor
+                                BAAK di Gedung Rektorat lantai 1.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bottom-0 w-full px-6 py-2 mx-auto text-white bg-blue-900 footer">
+            <div class="flex flex-col items-center justify-between md:flex-row">
+                <div class="mb-1 text-center md:text-left">
+                    <p class="text-xs">Portal Akademik Universitas Teknologi Digital Indonesia</p>
+                </div>
+                <div class="text-center md:text-right">
+                    <p class="text-xs ">&copy; 2025 SIAKAD UTDI</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const sidebar = document.getElementById('sidebar');
+
+        mobileMenuButton.addEventListener('click', () => {
+            sidebar.classList.toggle('hidden');
+            const menuIcon = mobileMenuButton.querySelector('.material-symbols-outlined');
+            menuIcon.textContent = sidebar.classList.contains('hidden') ? 'menu' : 'close';
+        });
+
+        const menuItems = sidebar.querySelectorAll('li');
+        menuItems.forEach(item => {
+            item.addEventListener('click', () => {
+                if (window.innerWidth < 1024) {
+                    sidebar.classList.add('hidden');
+                    mobileMenuButton.querySelector('.material-symbols-outlined').textContent = 'menu';
+                }
+            });
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 1024) {
+                sidebar.classList.remove('hidden');
+            } else {
+                sidebar.classList.add('hidden');
+            }
+        });
+    </script>
+    <script src="../scripts/offline.js"></script>
+</body>
+
+</html>
